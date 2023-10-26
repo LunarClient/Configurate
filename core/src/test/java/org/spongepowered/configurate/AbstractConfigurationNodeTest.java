@@ -175,8 +175,8 @@ class AbstractConfigurationNodeTest {
         assertFalse(child.virtual());
         assertSame(child, root.node("child"));
         child.raw(null);
-        assertTrue(child.virtual());
-        assertNotSame(child, root.node("child"));
+        assertFalse(child.virtual());
+        assertNull(child.raw());
     }
 
     @Test

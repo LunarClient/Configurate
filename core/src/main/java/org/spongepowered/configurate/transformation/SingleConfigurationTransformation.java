@@ -124,7 +124,7 @@ final class SingleConfigurationTransformation implements ConfigurationTransforma
         final Object @Nullable [] transformedPath = action.visitPath(nodePath, node);
         if (transformedPath != null && !Arrays.equals(path, transformedPath)) {
             this.strategy.move(node, start.node(transformedPath));
-            node.raw(null);
+            node.remove();
         }
     }
 

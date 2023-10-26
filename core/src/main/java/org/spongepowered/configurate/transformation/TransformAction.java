@@ -41,7 +41,7 @@ public interface TransformAction {
      */
     static TransformAction remove() {
         return (path, value) -> {
-            value.raw(null);
+            value.remove();
             return null;
         };
     }

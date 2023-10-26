@@ -251,13 +251,13 @@ abstract class AbstractConfigurationNode<N extends ScopedConfigurationNode<N>, A
             return this.self();
         }
 
-        // if the new value is null, handle detaching from this nodes parent
+        // if the new value is null, handle detaching children from this node
         if (newValue == null) {
             final @Nullable Object key = this.key;
             if (this.parent == null || key == null) {
                 this.clear();
             } else {
-                this.parent.removeChild(key);
+                this.value.clear();
             }
             return this.self();
         } else if (newValue instanceof Collection || newValue instanceof Map) {
@@ -415,19 +415,29 @@ abstract class AbstractConfigurationNode<N extends ScopedConfigurationNode<N>, A
 
     @Override
     public final N raw(final @Nullable Object newValue) {
-        // if the new value is null, handle detaching from this nodes parent
+        // if the new value is null, handle detaching children from this node
         if (newValue == null) {
             final @Nullable Object key = this.key;
             if (this.parent == null || key == null) {
                 this.clear();
             } else {
-                this.parent.removeChild(key);
+                this.value.clear();
             }
         } else {
             this.insertNewValue(newValue, false);
         }
 
         return this.self();
+    }
+
+    @Override
+    public void remove() {
+        final @Nullable Object key = this.key;
+        if (this.parent == null || key == null) {
+            this.clear();
+        } else {
+            this.parent.removeChild(key);
+        }
     }
 
     @Override

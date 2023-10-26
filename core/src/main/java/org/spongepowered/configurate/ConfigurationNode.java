@@ -1180,6 +1180,13 @@ public interface ConfigurationNode {
     ConfigurationNode raw(@Nullable Object value);
 
     /**
+     * Removes this node from its parent if it has one, or clears the value.
+     *
+     * @since 4.0.0
+     */
+    void remove();
+
+    /**
      * Get the raw value of this node if the node is a scalar.
      *
      * <p>The raw value is the plain value that will be passed to the loaders,
