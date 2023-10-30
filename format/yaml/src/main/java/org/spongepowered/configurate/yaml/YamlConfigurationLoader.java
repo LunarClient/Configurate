@@ -106,6 +106,7 @@ public final class YamlConfigurationLoader extends AbstractConfigurationLoader<C
 
         Builder() {
             this.indent(4);
+            this.sequenceIndent(0);
             this.defaultOptions(o -> o.nativeTypes(NATIVE_TYPES));
             this.from(DEFAULT_OPTIONS_SOURCE);
         }
@@ -140,6 +141,30 @@ public final class YamlConfigurationLoader extends AbstractConfigurationLoader<C
          */
         public int indent() {
             return this.options.getIndent();
+        }
+
+        /**
+         * Sets the level of indentation used in a sequence the resultant
+         * loader should use.
+         *
+         * @param indent the indent level
+         * @return this builder (for chaining)
+         * @since 4.0.0
+         */
+        public Builder sequenceIndent(final int indent) {
+            this.options.setIndicatorIndent(indent);
+            return this;
+        }
+
+        /**
+         * Gets the level of indentation in a sequence to be used by the
+         * resultant loader.
+         *
+         * @return the indent level
+         * @since 4.0.0
+         */
+        public int sequenceIndent() {
+            return this.options.getIndicatorIndent();
         }
 
         /**
@@ -257,7 +282,7 @@ public final class YamlConfigurationLoader extends AbstractConfigurationLoader<C
         opts.setDefaultFlowStyle(NodeStyle.asSnakeYaml(builder.style));
         opts.setProcessComments(builder.commentsEnabled());
         opts.setWidth(builder.lineLength());
-        opts.setIndicatorIndent(builder.indent());
+        opts.setIndicatorIndent(builder.sequenceIndent());
         opts.setIndentWithIndicator(true);
         // the constructor needs ConfigurationOptions, which is only available when called (loadInternal)
         this.constructor = ThreadLocal.withInitial(() -> new YamlConstructor(loaderOpts));
