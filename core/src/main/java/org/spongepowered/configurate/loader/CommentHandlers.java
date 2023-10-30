@@ -110,6 +110,14 @@ public enum CommentHandlers implements CommentHandler {
         protected final String endSequence;
         protected final String lineIndentSequence;
 
+        /**
+         * Constructs a new delineated handler.
+         *
+         * @param startSequence the start sequence
+         * @param endSequence the end sequence
+         * @param lineIndentSequence the line sequence
+         * @since 4.0.0
+         */
         protected AbstractDelineatedHandler(final String startSequence, final String endSequence, final String lineIndentSequence) {
             this.startSequence = startSequence;
             this.endSequence = endSequence;
@@ -205,6 +213,12 @@ public enum CommentHandlers implements CommentHandler {
     public static class AbstractPrefixHandler implements CommentHandler {
         protected final String commentPrefix;
 
+        /**
+         * Constructs a new prefix handler.
+         *
+         * @param commentPrefix the prefix
+         * @since 4.0.0
+         */
         protected AbstractPrefixHandler(final String commentPrefix) {
             this.commentPrefix = commentPrefix;
         }

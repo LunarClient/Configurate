@@ -109,15 +109,17 @@ class YamlConstructor extends Constructor {
         }
 
         final StringBuilder outputBuilder = new StringBuilder();
-        for (final CommentLine line : commentLines) {
-            if (outputBuilder.length() > 0) {
-                outputBuilder.append(AbstractConfigurationLoader.CONFIGURATE_LINE_SEPARATOR);
-            }
+        for (int index = 0; index < commentLines.size(); index++) {
+            final CommentLine line = commentLines.get(index);
             final String lineStripped = removeLineBreaksForLine(line.getValue());
             if (!lineStripped.isEmpty() && lineStripped.charAt(0) == ' ') {
                 outputBuilder.append(lineStripped, 1, lineStripped.length());
             } else {
                 outputBuilder.append(lineStripped);
+            }
+
+            if (index < (commentLines.size() - 1)) {
+                outputBuilder.append(AbstractConfigurationLoader.CONFIGURATE_LINE_SEPARATOR);
             }
         }
         return outputBuilder.toString();

@@ -63,23 +63,12 @@ final class YamlRepresenter extends Representer {
             final Node yamlNode;
             if (node.isMap()) {
                 final List<NodeTuple> children = new ArrayList<>();
-                boolean first = true;
                 for (Map.Entry<Object, ? extends ConfigurationNode> ent : node.childrenMap().entrySet()) {
                     // SnakeYAML supports both key and value comments. Add the comments on the key
                     final Node value = represent(ent.getValue());
                     final Node key = represent(ent.getKey());
                     key.setBlockComments(value.getBlockComments());
                     value.setBlockComments(Collections.emptyList());
-                    if (
-                            !first
-                            && !(node.parent() != null && node.parent().isList())
-                            && key.getBlockComments() != null
-                            && !key.getBlockComments().isEmpty()
-                    ) {
-                        key.getBlockComments().add(0, BLANK_LINE);
-                    }
-                    first = false;
-
                     children.add(new NodeTuple(key, value));
                 }
                 yamlNode = new MappingNode(Tag.MAP, children, this.flowStyle(node));
