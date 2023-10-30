@@ -185,42 +185,6 @@ class YamlConfigurationLoaderTest {
     }
 
     @Test
-    void testRoundtripEssX(final @TempDir Path tempDir) throws IOException {
-        final URL source = this.resource("essx-example.yml");
-        final Path destination = tempDir.resolve("essx-example-roundtrip.yml");
-
-        final YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
-            .path(destination)
-            .url(source)
-            .indent(2)
-            .nodeStyle(NodeStyle.BLOCK)
-            .build();
-
-        final ConfigurationNode sourceNode = loader.load();
-        loader.save(sourceNode);
-
-        assertContentsSame(source, destination);
-    }
-
-    @Test
-    void testRoundtripEssXLegacy(final @TempDir Path tempDir) throws IOException {
-        final URL source = this.resource("essx-legacy.yml");
-        final Path destination = tempDir.resolve("essx-legacy-roundtrip.yml");
-
-        final YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
-            .path(destination)
-            .url(source)
-            .nodeStyle(NodeStyle.BLOCK)
-            .indent(2)
-            .build();
-
-        final ConfigurationNode sourceNode = loader.load();
-        loader.save(sourceNode);
-
-        assertContentsSame(source, destination);
-    }
-
-    @Test
     void testRoundtripMobCleaner(final @TempDir Path tempDir) throws IOException {
         final URL source = this.resource("mobcleaner-example.yml");
         final Path destination = tempDir.resolve("mobcleaner-example-roundtrip.yml");

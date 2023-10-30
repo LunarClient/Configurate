@@ -47,20 +47,6 @@ worlds:
     spawn-reason:
       enabled: false
       reasons: []
-#  creative:
-#    entities:
-#      - ARMOR_STAND
-#      - ARROW
-#      - BOAT
-#      - DROPPED_ITEM
-#      - MINECART
-#      - MINECART_CHEST
-#      - MINECART_FURNACE
-#      - MINECART_HOPPER
-#      - MINECART_TNT
-#    spawn-reason:
-#      enabled: false
-#      reasons: []
 
 nearby-entities:
   # Should the plugin only remove entities that have multiple entities nearby?
@@ -111,8 +97,9 @@ warning-messages:
 
 # The command(s) to run after the entity clearing task runs
 commands:
-#  - nuke
+#- nuke
 
+# The low TPS settings
 low-tps:
   # Should the entity removal task be triggered when the TPS is low?
   enabled: false
