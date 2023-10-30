@@ -130,13 +130,14 @@ final class YamlRepresenter extends Representer {
         private CommentLine commentLineFor(final String comment) {
             if (comment.isEmpty()) {
                 return BLANK_LINE;
-            } else if (!YamlRepresenter.this.padComments || comment.charAt(0) == '#') {
-                return new CommentLine(null, null, comment, CommentType.BLOCK);
+            } else if (YamlRepresenter.this.padComments && YamlCommentHandler.applyPadding(comment)) {
+                // prepend a space before the comment:
+                // before: #hello
+                // after:  # hello
+                return new CommentLine(null, null, " " + comment, CommentType.BLOCK);
             }
-            // prepend a space before the comment:
-            // before: #hello
-            // after:  # hello
-            return new CommentLine(null, null, " " + comment, CommentType.BLOCK);
+
+            return new CommentLine(null, null, comment, CommentType.BLOCK);
         }
     }
 

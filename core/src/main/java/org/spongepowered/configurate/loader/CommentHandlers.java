@@ -99,13 +99,18 @@ public enum CommentHandlers implements CommentHandler {
         return null;
     }
 
+    /**
+     * Represents a delineated comment handler.
+     *
+     * @since 4.0.0
+     */
     @Immutable
-    private static final class AbstractDelineatedHandler implements CommentHandler {
-        private final String startSequence;
-        private final String endSequence;
-        private final String lineIndentSequence;
+    public static class AbstractDelineatedHandler implements CommentHandler {
+        protected final String startSequence;
+        protected final String endSequence;
+        protected final String lineIndentSequence;
 
-        private AbstractDelineatedHandler(final String startSequence, final String endSequence, final String lineIndentSequence) {
+        protected AbstractDelineatedHandler(final String startSequence, final String endSequence, final String lineIndentSequence) {
             this.startSequence = startSequence;
             this.endSequence = endSequence;
             this.lineIndentSequence = lineIndentSequence;
@@ -191,11 +196,16 @@ public enum CommentHandlers implements CommentHandler {
         }
     }
 
+    /**
+     * Represents a prefix comment handler.
+     *
+     * @since 4.0.0
+     */
     @Immutable
-    private static final class AbstractPrefixHandler implements CommentHandler {
-        private final String commentPrefix;
+    public static class AbstractPrefixHandler implements CommentHandler {
+        protected final String commentPrefix;
 
-        AbstractPrefixHandler(final String commentPrefix) {
+        protected AbstractPrefixHandler(final String commentPrefix) {
             this.commentPrefix = commentPrefix;
         }
 

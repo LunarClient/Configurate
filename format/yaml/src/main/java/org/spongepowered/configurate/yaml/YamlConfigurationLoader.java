@@ -23,7 +23,6 @@ import org.spongepowered.configurate.ConfigurationOptions;
 import org.spongepowered.configurate.RepresentationHint;
 import org.spongepowered.configurate.loader.AbstractConfigurationLoader;
 import org.spongepowered.configurate.loader.CommentHandler;
-import org.spongepowered.configurate.loader.CommentHandlers;
 import org.spongepowered.configurate.loader.LoaderOptionSource;
 import org.spongepowered.configurate.util.UnmodifiableCollections;
 import org.yaml.snakeyaml.DumperOptions;
@@ -272,10 +271,12 @@ public final class YamlConfigurationLoader extends AbstractConfigurationLoader<C
     private final ThreadLocal<Yaml> yaml;
 
     private YamlConfigurationLoader(final Builder builder) {
-        super(builder, new CommentHandler[] {CommentHandlers.HASH});
+        super(builder, new CommentHandler[] {YamlCommentHandler.INSTANCE});
+
         final LoaderOptions loaderOpts = new LoaderOptions()
             .setAcceptTabs(true)
             .setProcessComments(builder.commentsEnabled());
+
         loaderOpts.setCodePointLimit(Integer.MAX_VALUE);
 
         final DumperOptions opts = builder.options;
@@ -284,6 +285,7 @@ public final class YamlConfigurationLoader extends AbstractConfigurationLoader<C
         opts.setWidth(builder.lineLength());
         opts.setIndicatorIndent(builder.sequenceIndent());
         opts.setIndentWithIndicator(true);
+
         // the constructor needs ConfigurationOptions, which is only available when called (loadInternal)
         this.constructor = ThreadLocal.withInitial(() -> new YamlConstructor(loaderOpts));
         this.yaml = ThreadLocal.withInitial(() -> new Yaml(this.constructor.get(), new YamlRepresenter(true, opts), opts, loaderOpts));
