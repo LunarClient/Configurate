@@ -1,4 +1,5 @@
 [versions]
+artifactregistry = "2.2.1"
 assertj="3.24.2"
 autoValue="1.10.4"
 checkerQual="3.38.0"
@@ -55,6 +56,7 @@ clikt = "com.github.ajalt:clikt:2.8.0"
 jansi = "org.fusesource.jansi:jansi:2.4.1"
 
 # Build
+build-artifactregistry = { module = "gradle.plugin.com.google.cloud.artifactregistry:artifactregistry-gradle-plugin", version.ref = "artifactregistry" }
 build-codenarc = { module = "org.codenarc:CodeNarc", version = "3.3.0-groovy-4.0" }
 build-codenarcGroovy = { module = "org.apache.groovy:groovy-all", version = "4.0.15" }
 build-errorprone = "net.ltgt.gradle:gradle-errorprone-plugin:3.1.0"
@@ -74,6 +76,7 @@ zKtfmt = { module = "com.facebook:ktfmt", version.ref = "ktfmt" }
 
 [plugins]
 aggregateJavadoc = "io.freefair.aggregate-javadoc-jar:8.4"
+artifactregistry = { id = "com.google.cloud.artifactregistry.gradle-plugin", version.ref = "artifactregistry" }
 detekt = "io.gitlab.arturbosch.detekt:1.23.1"
 dokka = "org.jetbrains.dokka:1.9.0"
 gitPublish = "org.ajoberstar.git-publish:3.0.1"

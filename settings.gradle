@@ -5,6 +5,9 @@ pluginManagement {
             url = "https://repo.spongepowered.org/repository/maven-public/"
             mavenContent { releasesOnly() }
         }
+        maven {
+            url = "https://us-maven.pkg.dev/moonsworth-299m4oir/maven-public"
+        }
     }
 }
 

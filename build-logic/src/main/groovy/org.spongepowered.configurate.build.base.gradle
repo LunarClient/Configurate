@@ -16,7 +16,7 @@ spotless {
     format 'configs', {
         target '**/*.yaml', '**/*.yml', '**/*.xml', '**/*.json'
 
-        def excludedTargets = ['.idea/**', 'vendor/**', 'build/**', '.gradle/**']
+        def excludedTargets = ['.idea/**', 'vendor/**', 'build/**', '.gradle/**', '*.json']
         project.subprojects { sub ->
             excludedTargets << sub.rootDir.relativePath(sub.projectDir) + '/**'
         }

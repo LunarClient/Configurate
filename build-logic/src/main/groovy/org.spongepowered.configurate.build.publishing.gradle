@@ -1,3 +1,4 @@
+import net.kyori.indra.git.GitPlugin
 import org.spongepowered.configurate.build.SignJarTask
 
 import java.nio.file.Files
@@ -6,6 +7,8 @@ import java.nio.file.attribute.PosixFilePermission
 plugins {
     id 'org.spongepowered.configurate.build.base'
     id "net.kyori.indra.publishing"
+    id "maven-publish"
+    id "com.google.cloud.artifactregistry.gradle-plugin"
 }
 
 def archiveName = "configurate-${name.toLowerCase(Locale.ROOT)}"
@@ -91,15 +94,16 @@ indra {
         publishing(true) // GH Packages
         ci(true) // GH Actions
     }
+
     apache2License()
 
-    if (
-        project.hasProperty("spongeSnapshotRepo") &&
-        project.hasProperty("spongeReleaseRepo")
-    ) {
-        publishSnapshotsTo("sponge", project.spongeSnapshotRepo)
-        publishReleasesTo("sponge", project.spongeReleaseRepo)
-    }
+    //if (
+    //    project.hasProperty("spongeSnapshotRepo") &&
+    //    project.hasProperty("spongeReleaseRepo")
+    //) {
+    //    publishSnapshotsTo("sponge", project.spongeSnapshotRepo)
+    //    publishReleasesTo("sponge", project.spongeReleaseRepo)
+    //}
 
     configurePublications {
         artifactId = archiveName
@@ -123,6 +127,16 @@ indra {
     }
 }
 
+extensions.configure(PublishingExtension.class) {
+    it.repositories.maven {
+        url = "artifactregistry://us-maven.pkg.dev/moonsworth-299m4oir/maven-public"
+    }
+}
+
+tasks.named(GitPlugin.REQUIRE_CLEAN_TASK).configure {
+    onlyIf { false }
+}
+
 // Signing, using specified private key file
 signing {
     def spongeSigningKey = project.findProperty("spongeSigningKey")
@@ -141,6 +155,6 @@ signing {
 
 tasks.withType(Sign).configureEach {
     onlyIf {
-        !project.hasProperty("skipSigning")
+        project.hasProperty("enableSigning")
     }
 }
