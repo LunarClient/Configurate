@@ -257,6 +257,7 @@ abstract class AbstractConfigurationNode<N extends ScopedConfigurationNode<N>, A
             if (this.parent == null || key == null) {
                 this.clear();
             } else {
+                this.attachIfNecessary();
                 this.value.clear();
             }
             return this.self();
@@ -421,6 +422,7 @@ abstract class AbstractConfigurationNode<N extends ScopedConfigurationNode<N>, A
             if (this.parent == null || key == null) {
                 this.clear();
             } else {
+                this.attachIfNecessary();
                 this.value.clear();
             }
         } else {

@@ -113,14 +113,21 @@ class YamlConfigurationLoaderTest {
         final ConfigurationNode expected = CommentedConfigurationNode.root(n ->
             n.node("waffles-with-syrup")
                 .comment("hello world")
-                .act(p ->
+                .act(p -> {
+                    p.node("empty-keys")
+                        .act(i -> {
+                            i.node("foo").set(null).comment("the foo value");
+                            i.node("bar").set(null);
+                            i.node("baz").set(null).comment("another baz value");
+                        });
+
                     p.node("ingredients")
                         .comment("multi-line\ncomments")
                         .act(i -> {
                             i.appendListNode().set("waffles").comment("would you've guessed the ingredients?");
                             i.appendListNode().set("syrup").comment("I certainly didn't");
-                        })
-                ));
+                        });
+                }));
 
         final URL url = this.resource("comments-test.yml");
         final YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
@@ -136,14 +143,21 @@ class YamlConfigurationLoaderTest {
         final ConfigurationNode node = CommentedConfigurationNode.root(n ->
             n.node("waffles-with-syrup")
                 .comment("hello world")
-                .act(p ->
+                .act(p -> {
+                    p.node("empty-keys")
+                        .act(i -> {
+                            i.node("foo").set(null).comment("the foo value");
+                            i.node("bar").set(null);
+                            i.node("baz").set(null).comment("another baz value");
+                        });
+
                     p.node("ingredients")
                         .comment("multi-line\ncomments")
                         .act(i -> {
                             i.appendListNode().set("waffles").comment("would you've guessed the ingredients?");
                             i.appendListNode().set("syrup").comment("I certainly didn't");
-                        })
-                ));
+                        });
+                }));
 
         final YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
             .path(target)

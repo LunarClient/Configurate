@@ -1,5 +1,11 @@
 # hello world
 waffles-with-syrup:
+    empty-keys:
+        # the foo value
+        foo:
+        bar:
+        # another baz value
+        baz:
     # multi-line
     # comments
     ingredients:
