@@ -145,7 +145,7 @@ public abstract class AbstractConfigurationLoader<N extends ScopedConfigurationN
             throw new ParsingException(UNKNOWN_POS, UNKNOWN_POS, "", "No source present to read from!", null);
         }
         try (BufferedReader reader = this.source.call()) {
-            if (this.headerMode == HeaderMode.PRESERVE || this.headerMode == HeaderMode.NONE) {
+            if (this.headerMode == HeaderMode.PRESERVE) {
                 final @Nullable String comment = CommentHandlers.extractComment(reader, this.commentHandlers);
                 if (comment != null && comment.length() > 0) {
                     options = options.header(comment);
