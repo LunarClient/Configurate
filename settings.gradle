@@ -6,7 +6,7 @@ pluginManagement {
             mavenContent { releasesOnly() }
         }
         maven {
-            url = "https://us-maven.pkg.dev/moonsworth-299m4oir/maven-public"
+            url = "https://us-maven.pkg.dev/mw-lunarclient-maven-repo/public"
         }
     }
 }
